@@ -86,14 +86,18 @@ function buildWindows(){
 		for(var j = 0; j < window[i].length; j++){
 			while(window[i][j] == "f" && which_single < stage.length){
 				if(bigones.indexOf(which_single) < 0){
-					html += "<td width="+percentage+"%><img src='images/recipes/"+stage[which_single]+".jpg' width=100%/></td>";
+					html += "<td width="+percentage+"%>";
+					html += makeBlock(stage[which_single]);
+					html += "</td>";
 					window[i][j] = "s";
 				}
 				which_single++;
 			}
 			while(window[i][j] == "x" && which_double < stage.length){
 				if(bigones.indexOf(which_double) >= 0){
-					html += "<td colspan=2 rowspan=2 width="+2*percentage+"%><img src='images/recipes/"+stage[which_double]+".jpg' width=100%/></td>";
+					html += "<td colspan=2 rowspan=2 width="+2*percentage+"%>";
+					html += makeBlock(stage[which_double]);
+					html += "</td>";
 					window[i][j] = "d";
 				}
 				which_double++;
@@ -102,7 +106,7 @@ function buildWindows(){
 		html+="</tr>";
 		html+="<tr>";
 	}
-	html += "<table>";
+	html += "</table>";
 	document.body.innerHTML = html;
 }
 
@@ -114,4 +118,32 @@ function manyIs(window,row){
 		}
 	}
 	return (count > 1);
+}
+
+function makeBlock(content){
+	html = "";
+	html += "<div onclick='popUpRecipe(\""+content+"\")'>";
+	html += "<img src='images/recipes/"+content+".jpg' width=100%/>";
+	html += "</div>";
+	return html;
+}
+
+
+function popUpRecipe(content){
+	var connection = new XMLHttpRequest();
+	connection.open("GET","recipes/"+content,false);
+	connection.send();
+	recipe = JSON.parse(connection.responseText);
+	
+	html = "<div class='recipe' id='recipe-"+content+"'>";
+	html += "<p onclick='document.body.removeChild(document.getElementById(\"recipe-"+content+"\"))'>X</p>";
+	html += "<img class='main-image' src='images/recipes/"+content+".jpg'/>";
+	for(var what in recipe.ingredients){
+		html += "<div class='ingredient'>";
+		html += "<img src='images/ingredients/"+what+".png'/> ";
+		html += "<p>"+what+": "+recipe.ingredients[what]+"</p>";
+		html += "</div>";
+	}
+	html += "</div>";
+	document.body.innerHTML += html;
 }
