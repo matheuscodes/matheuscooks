@@ -135,15 +135,42 @@ function popUpRecipe(content){
 	connection.send();
 	recipe = JSON.parse(connection.responseText);
 	
-	html = "<div class='recipe' id='recipe-"+content+"'>";
-	html += "<p onclick='document.body.removeChild(document.getElementById(\"recipe-"+content+"\"))'>X</p>";
+	html = "<div class='recipe' id='recipe-"+content+"'>";	
+	html += "<p onclick='document.body.removeChild(document.getElementById(\"recipe-"+content+"\"))'>(X)</p>";
 	html += "<img class='main-image' src='images/recipes/"+content+".jpg'/>";
+	var counter = 1;
+	var columns = 3;
+
+	html += "<h1>"+content+"</h1>";
+	
+	html += "<h2>Ingredients</h2>";
+	
+	html += "<table width=59%><tr>";
 	for(var what in recipe.ingredients){
-		html += "<div class='ingredient'>";
+		html += "<td class='ingredient'>";
 		html += "<img src='images/ingredients/"+what+".png'/> ";
 		html += "<p>"+what+": "+recipe.ingredients[what]+"</p>";
-		html += "</div>";
+		if(counter % columns == 0){
+			html += "</td></tr><tr>";
+		}
+		else{
+			html += "</td>";
+		}
+		counter++;
 	}
+	for(var what in recipe.ingredients){
+		html += "<td class='ingredient'>";
+		html += "<img src='images/ingredients/"+what+".png'/> ";
+		html += "<p>"+what+": "+recipe.ingredients[what]+"</p>";
+		if(counter % columns == 0){
+			html += "</td></tr><tr>";
+		}
+		else{
+			html += "</td>";
+		}
+		counter++;
+	}
+	html += "</tr></table>";
 	html += "</div>";
 	document.body.innerHTML += html;
 }

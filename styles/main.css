@@ -3,7 +3,7 @@
 	position: absolute;
 	top: 1em;
 	left: 1em;
-	padding: 0.5em 1em;
+	padding: 0 0 1em 1em;
 	margin: 0 1em 0 0;
 }
 
@@ -12,20 +12,45 @@
 	float: left;
 }
 
-
-.ingredient{
+.recipe h1{
+	margin: 1em;
+	text-align: right;
+	width: 50%;
 	float: right;
+}
+
+.recipe table{
+	float:right;
 	width: 59%;
 }
 
+.recipe h2{
+	margin: 0.5em;
+	width:50%;
+	text-align: right;
+	float: right;
+}
+
+.recipe p{
+	text-align: right;
+	margin: 0.25em;
+	
+}
+
+
+
+.ingredient{
+	width:33%;
+	text-align:center;
+}
+
 .ingredient p{
-	vertical-align: middle;
-	float: left;
+	text-align: center;
 }
 
 
 .ingredient img{
-	width: 64px;
-	float: left;
+	width: 3em;
 	margin: 0.5em;
+	float: none;
 }
