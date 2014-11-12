@@ -1,0 +1,19 @@
+{
+	"ingredients":{
+		"flour":150,
+		"sugar":150,
+		"butter":25,
+		"apple":175,
+		"egg":1,
+		"baking-powder":3
+	},
+	"preparation":{
+                "turn-oven":{
+                        "temperature":190
+                },
+                "bake":{
+                        "time":25,
+                        "temperature":190
+                }
+        }
+}

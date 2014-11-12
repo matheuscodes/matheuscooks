@@ -8,4 +8,14 @@
 		"sugar-vanilla":10,
 		"egg":1
 	}
+	"preparation":{
+		"turn_oven":{
+			"temperature":210
+		},
+		"bake":{
+			"time":10,
+			"temperature":210
+		}
+	}
+	"portions":3
 }

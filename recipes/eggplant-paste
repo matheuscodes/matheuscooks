@@ -1,0 +1,17 @@
+{
+	"ingredients":{
+		"eggplant":1,
+		"garlic":3,
+		"lemon-juice":15,
+		"sesam-oil":10
+	},
+	"preparation":{
+                "turn_oven":{
+                        "temperature":170
+                },
+                "bake":{
+                        "time":50,
+                        "temperature":170
+                }
+        }
+}

@@ -1,0 +1,20 @@
+{
+	"ingredients":{
+		"orange-concentrated-4-1":50,
+		"carrot":100,
+		"almond":100,
+		"flour":100,
+		"sugar":200,
+		"egg":1,
+		"butter":50
+	},
+	"preparation":{
+                "turn_oven":{
+                        "temperature":180
+                },
+                "bake":{
+                        "time":30,
+                        "temperature":180
+                }
+        }
+}
