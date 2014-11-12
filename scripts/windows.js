@@ -1,5 +1,5 @@
-function buildWindows(){
-	var width = document.body.offsetWidth;
+function buildWindows(window){
+	var width = window.innerWidth;
 
 	var columns = 5;
 	var min_window_width = 128;
@@ -145,32 +145,21 @@ function popUpRecipe(content){
 	
 	html += "<h2>Ingredients</h2>";
 	
-	html += "<table width=59%><tr>";
+	//html += "<table width=59%><tr>";
 	for(var what in recipe.ingredients){
-		html += "<td class='ingredient'>";
+		html += "<div class='ingredient'>";
 		html += "<img src='images/ingredients/"+what+".png'/> ";
-		html += "<p>"+what+": "+recipe.ingredients[what]+"</p>";
-		if(counter % columns == 0){
+		html += "<p>"+what+"<br/>"+recipe.ingredients[what]+"</p>";
+		/*if(counter % columns == 0){
 			html += "</td></tr><tr>";
 		}
 		else{
 			html += "</td>";
-		}
+		}*/
+		html += "</div>";
 		counter++;
 	}
-	for(var what in recipe.ingredients){
-		html += "<td class='ingredient'>";
-		html += "<img src='images/ingredients/"+what+".png'/> ";
-		html += "<p>"+what+": "+recipe.ingredients[what]+"</p>";
-		if(counter % columns == 0){
-			html += "</td></tr><tr>";
-		}
-		else{
-			html += "</td>";
-		}
-		counter++;
-	}
-	html += "</tr></table>";
+	//html += "</tr></table>";
 	html += "</div>";
 	document.body.innerHTML += html;
 }
