@@ -130,36 +130,71 @@ function makeBlock(content){
 
 
 function popUpRecipe(content){
+	var previous = document.getElementById('recipe');
+
+	if(previous) previous.remove();
+
+
 	var connection = new XMLHttpRequest();
 	connection.open("GET","recipes/"+content,false);
 	connection.send();
 	recipe = JSON.parse(connection.responseText);
 	
-	html = "<div class='recipe' id='recipe-"+content+"'>";	
-	html += "<p onclick='document.body.removeChild(document.getElementById(\"recipe-"+content+"\"))'>(X)</p>";
+	html = "<div class='recipe' id='recipe' style='top:"+document.defaultView.scrollY+"'>";	
 	html += "<img class='main-image' src='images/recipes/"+content+".jpg'/>";
 	var counter = 1;
 	var columns = 3;
 
+	html += "<p onclick='document.getElementById(\"recipe\").remove();'>(X)</p>";
+
 	html += "<h1>"+content+"</h1>";
 	
 	html += "<h2>Ingredients</h2>";
+
+	html += "<div class='line'></div>";
+
+	html += "<div class='ingredients'>";
 	
-	//html += "<table width=59%><tr>";
 	for(var what in recipe.ingredients){
 		html += "<div class='ingredient'>";
 		html += "<img src='images/ingredients/"+what+".png'/> ";
 		html += "<p>"+what+"<br/>"+recipe.ingredients[what]+"</p>";
-		/*if(counter % columns == 0){
-			html += "</td></tr><tr>";
-		}
-		else{
-			html += "</td>";
-		}*/
 		html += "</div>";
 		counter++;
 	}
-	//html += "</tr></table>";
+	html += "</div>";
+
+	html += "<h2>Instructions</h2>";
+
+	html += "<div class='line'></div>";
+
+
 	html += "</div>";
 	document.body.innerHTML += html;
+}
+
+
+document.onscroll = function(){
+	var floater = document.getElementById('recipe');
+
+	if(!floater) return;
+
+	var current = floater.style.top.substr(0,floater.style.top.indexOf("px"));
+	current = current - 0; //make this nicely
+	if(current > document.defaultView.scrollY){
+		floater.style.top = document.defaultView.scrollY;
+	}
+	else if(floater.clientHeight < document.body.clientHeight){
+		floater.style.top = document.defaultView.scrollY;
+	}
+	else if(document.defaultView.scrollY + document.body.clientHeight > current + floater.clientHeight){
+		floater.style.top = document.defaultView.scrollY + document.body.clientHeight - floater.clientHeight;
+	}
+
+	console.log((document.defaultView.scrollY + document.body.clientHeight) +" "+ (current + floater.clientHeight));
+
+}
+
+document.defaultView.onresize = function(){
+	buildWindows(window);
 }

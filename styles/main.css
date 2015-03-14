@@ -1,34 +1,65 @@
+@font-face{
+	font-family:'titleFont';
+	src:url("../fonts/PARCHM.TTF");
+}
+
+@font-face{
+	font-family:'innerFont';
+	src:url("../fonts/VINERITC.TTF");
+}
+
 .recipe {
-	background:#FFF;
-	position: fixed;
-	top: 1em;
-	left: 1em;
-	padding: 0 0 1em 1em;
-	margin: 0 1em 0 0;
+	background:#000;
+	position: absolute;
+	left: 0;
+	width: 100%;
 	text-align: right;
 }
 
 .recipe img{
 	width: 40%;
 	float: left;
+	padding: 6pt 0;
 }
 
 .recipe h1{
-	margin: 1em;
+	font-family: titleFont;
+	font-size: 80pt;
+	font-weight: unset;
 	text-align: right;
+	color: #FFF;
+	margin: 0 30pt;
+	line-height: 40pt;
 }
 
 .recipe h2{
-	margin: 0.5em;
+	font-family: titleFont;
+	font-size: 40pt;
+	font-weight: unset;
+	color: #FFF;
+	margin: 0 30pt;
 	text-align: right;
 }
 
+.recipe .line{
+	height: 2pt;
+	width: 100%;
+	background: #FFF;
+}
+
 .recipe p{
+	color:#FFF;
 	text-align: right;
 	margin: 0.25em;
 }
 
 
+.ingredients{
+	font-family: innerFont;
+	color: #FFF;
+	background: #000;
+	margin: 0.2%;
+}
 
 .ingredient{
 	display: inline-flex;
