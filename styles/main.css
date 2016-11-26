@@ -76,3 +76,36 @@
 	width: 4em;
 	float: left;
 }
+
+.nutrition {
+	font-family: Verdana;
+	background:#FFF;
+	width: 200pt;
+	float:left;
+	margin: 10pt;
+	border: 1pt solid #FFF;
+}
+
+.nutrition p{
+	color: #000;
+	text-align: center;
+}
+
+.nutrition td{
+	font-size: 10pt;
+}
+
+.nutrition .main td{
+	font-size: 8pt;
+}
+
+
+.nutrition h1, .nutrition h2{
+	font-family: unset;
+	font-size: unset;
+	width:100%;
+	padding: 0px;
+	margin: 0px;
+	background: none repeat scroll 0% 0% #000;
+	text-align: center;
+}

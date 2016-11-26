@@ -1,3 +1,8 @@
+/* Known/Fixed Bugs */
+//-  Resizing the screen closes the pop up recipe.
+/* End */
+
+
 function buildWindows(window){
 	var width = window.innerWidth;
 
@@ -78,7 +83,6 @@ function buildWindows(window){
 			}
 		}
 	}
-	console.log(window);
 
 	var which_single = 0;
 	var which_double = 0;
@@ -129,6 +133,8 @@ function makeBlock(content){
 }
 
 
+var selected_recipe;
+
 function popUpRecipe(content){
 	var previous = document.getElementById('recipe');
 
@@ -139,7 +145,8 @@ function popUpRecipe(content){
 	connection.open("GET","recipes/"+content,false);
 	connection.send();
 	recipe = JSON.parse(connection.responseText);
-	
+	selected_recipe = recipe;
+
 	html = "<div class='recipe' id='recipe' style='top:"+document.defaultView.scrollY+"'>";	
 	html += "<img class='main-image' src='images/recipes/"+content+".jpg'/>";
 	var counter = 1;
@@ -164,13 +171,73 @@ function popUpRecipe(content){
 	}
 	html += "</div>";
 
-	html += "<h2>Instructions</h2>";
+	html += "<h2>Details</h2>";
 
 	html += "<div class='line'></div>";
 
 
+	html += "<div class='details'>";
+
+	html += "<div class='nutrition' id='nutrition-facts'>";
+
+	html += "<h1>Nutrition facts</h1>";
+
+	html += "<p onclick='openNutrition()'>Click here to know more.</p>";
+
+	html += "</div>";
+
+	html += "</div>";
+
 	html += "</div>";
 	document.body.innerHTML += html;
+}
+
+function openNutrition(){
+	
+	html = "<h1>Nutrition facts</h1>";
+
+	html += "<table width='100%'>";
+	html += "<tr class='main'><td width='40%'/>";
+	html += "<td width='30%'> <strong>per 100g</strong> </td>";
+	html += "<td width='30%'> <strong>per portion</strong> </td>";
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td> Energy </td>";
+	html += "<td> 1235 kcal </td>";
+	html += "<td> 5432 kcal </td>";
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td> Protein </td>";
+	html += "<td> 12g </td>";
+	html += "<td> 33g </td>";
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td> Carbs </td>";
+	html += "<td> 80g </td>";
+	html += "<td> 120g </td>";
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td> - sugar </td>";
+	html += "<td> 5g </td>";
+	html += "<td> 10g </td>";
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td> Energy </td>";
+	html += "<td> 1235 kcal </td>";
+	html += "<td> 5432 kcal </td>";
+	html += "</tr>";
+
+
+	html += "</table>";
+
+	html += "<p onclick='openMoreNutrition()'>Click here to know more.</p>";
+
+	document.getElementById('nutrition-facts').innerHTML = html;
 }
 
 
