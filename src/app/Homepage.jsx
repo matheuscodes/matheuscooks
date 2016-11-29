@@ -1,4 +1,5 @@
 import React from 'react';
+import {RecipeGrid} from 'app';
 
 /**
  * Root HTML.
@@ -12,11 +13,10 @@ class Homepage extends React.Component {
 
   render() {
     return (
-      <div style={{margin: '0 0 48pt'}}>
-        'This is a test.'
-      </div>
+      <RecipeGrid />
     );
   }
 }
+
 
 module.exports = module.default = module.Homepage = Homepage;

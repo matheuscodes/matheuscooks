@@ -4,11 +4,11 @@
   "description": "Personal recipe book.",
   "main": "server.js",
   "scripts": {
-    "bundle": "browserify src/app.js -t babelify --outfile build/app.js",
+    "bundle": "browserify src/application.js -t babelify --outfile build/app.js",
     "build": "rm -rf build && mkdir build && npm run bundle",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "fresh-start": "npm run bundle && node server.js" 
+    "fresh-start": "npm run bundle && node src/server.js"
   },
   "repository": {
     "type": "git",

@@ -42,7 +42,6 @@ app.get("/home", function(req, res) {
 
 app.use('/images',express.static('images'));
 app.use('/fonts',express.static('fonts'));
-//app.use('/recipes',express.static('recipes'));
 
 app.param('recipe', function(req, res, next, recipe) {
   if(typeof recipe !== 'undefined'){
@@ -62,7 +61,7 @@ app.get('/recipes-index', function(req, res) {
   res.send(JSON.stringify(recipeList));
 });
 
-app.use('/index.html',express.static('index.html'));
+app.use('/index.html',express.static('src/index.html'));
 app.use('/scripts',express.static('scripts'));
 app.use('/styles',express.static('styles'));
 
