@@ -1,2 +1,7 @@
 import RecipeGrid from 'app/RecipeGrid.jsx';
-export {RecipeGrid};
+import Homepage from 'app/Homepage.jsx';
+
+export {
+  RecipeGrid,
+  Homepage
+};

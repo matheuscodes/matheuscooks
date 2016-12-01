@@ -1,11 +1,11 @@
 @font-face{
 	font-family:'titleFont';
-	src:url("../fonts/PARCHM.TTF");
+	src:url("https://img.matheus.software/matheuscooks/fonts/DJBChalkItUp.ttf");
 }
 
 @font-face{
 	font-family:'innerFont';
-	src:url("../fonts/VINERITC.TTF");
+	src:url("https://img.matheus.software/matheuscooks/fonts/DJBChalkItUp.ttf");
 }
 
 .recipe {

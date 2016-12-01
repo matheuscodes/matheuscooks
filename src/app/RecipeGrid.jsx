@@ -1,16 +1,31 @@
 import React from 'react';
-import {Request} from 'app/helpers';
+import {request} from 'app/helpers';
+
+import {GridList} from 'material-ui/GridList';
+
+import RecipeTile from 'app/RecipeTile.jsx';
 
 /**
  * Grid of recipes.
  * @author Matheus
  * @since 1.0.0
  */
-class RecipeGrid extends React.Component {
 
+class RecipeGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {recipes:[]};
+    this.style = {
+      root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+      },
+      gridList: {
+        width: '100%',
+        overflowY: 'auto',
+      },
+    }
   }
 
   componentDidMount() {
@@ -20,22 +35,31 @@ class RecipeGrid extends React.Component {
         this.setState({recipes:JSON.parse(response.responseText)});
       }
     }
-    Request('/recipes','GET',callbacks).send();
+    request('/recipes','GET',callbacks).send();
   }
 
   render() {
     let recipes = this.state.recipes.map((recipe) =>
-      <div style={{margin: '0 0 48pt'}}>
-        {recipe}
+      <RecipeTile
+        rows={1}
+        cols={1}
+        key={recipe}
+        recipeId={recipe} />
+    );
+    return (
+      <div style={this.style.root}>
+        <GridList
+          cols={(
+            Math.floor(document.documentElement.clientWidth / 320) ||
+            Math.floor(window.innerWidth / 320) || 1
+          )}
+          cellHeight={320}
+          padding={1}
+          style={this.style.gridList}>
+          {(recipes || 'No recipes.')}
+        </GridList>
       </div>
     );
-    console.log(recipes)
-    if(recipes.length > 0){
-      return (<div> {recipes} </div>);
-    }
-    else{
-      return <div>No recipes.</div>
-    }
   }
 }
 

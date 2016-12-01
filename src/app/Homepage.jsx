@@ -1,4 +1,7 @@
 import React from 'react';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import {RecipeGrid} from 'app';
 
 /**
@@ -13,10 +16,12 @@ class Homepage extends React.Component {
 
   render() {
     return (
-      <RecipeGrid />
+      <MuiThemeProvider>
+        <RecipeGrid />
+      </MuiThemeProvider>
     );
   }
 }
 
 
-module.exports = module.default = module.Homepage = Homepage;
+module.exports = Homepage;

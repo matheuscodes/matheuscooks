@@ -4,11 +4,9 @@
 const injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
-import Homepage from 'app/Homepage.jsx';
+import {Homepage} from 'app';
 import {createElement} from 'react';
 import {render} from 'react-dom';
-
-console.log("Loading");
 
 var renderParent = document.getElementById('mainContainer');
 
@@ -17,5 +15,3 @@ const props = {
 };
 
 render(createElement(Homepage, props), renderParent);
-
-console.log("Loaded");
