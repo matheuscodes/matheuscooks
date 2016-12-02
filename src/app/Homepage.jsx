@@ -9,7 +9,8 @@ const muiTheme = getMuiTheme({
   fontFamily: 'DJBChalkItUp',
   palette: {
     textColor: white,
-    canvasColor: fullBlack
+    canvasColor: fullBlack,
+    primary1Color: fullBlack
   },
 });
 

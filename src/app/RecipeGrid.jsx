@@ -7,6 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import {request} from 'app/helpers';
 
 import RecipeTile from 'app/RecipeTile.jsx';
+import RecipeDialog from 'app/RecipeDialog.jsx';
 
 /**
  * Grid of recipes.
@@ -44,12 +45,14 @@ class RecipeGrid extends React.Component {
   handleClose() {
     let current = this.state;
     current.open = false;
+    delete current.recipeId;
     this.setState(current);
   }
 
-  handleOpen() {
+  handleOpen(recipeId) {
     let current = this.state;
     current.open = true;
+    current.recipeId = recipeId;
     this.setState(current);
   }
 
@@ -57,8 +60,7 @@ class RecipeGrid extends React.Component {
     let recipes = this.state.recipes.map((recipe) =>
       <RecipeTile
         openDialog={this.handleOpen}
-        rows={1}
-        cols={1}
+        rows={1} cols={1}
         key={recipe}
         recipeId={recipe} />
     );
@@ -70,17 +72,14 @@ class RecipeGrid extends React.Component {
             Math.floor(window.innerWidth / 320) || 1
           )}
           cellHeight={320}
-          padding={1}
+          padding={4}
           style={this.style.gridList} >
           {(recipes || 'No recipes.')}
         </GridList>
-        <Dialog
-          title="Dialog With Actions"
-          modal={false}
+        <RecipeDialog
+          recipeId={this.state.recipeId}
           open={this.state.open}
-          onRequestClose={this.handleClose} >
-          The actions in this window were passed in as an array of React objects.
-        </Dialog>
+          onRequestClose={this.handleClose} />
       </div>
     );
   }

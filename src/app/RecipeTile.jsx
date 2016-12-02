@@ -36,6 +36,10 @@ class RecipeTile extends React.Component {
     });
   }
 
+  openRecipe() {
+    this.props.openDialog(this.props.recipeId);
+  }
+
   render() {
     return (
       <GridTile
@@ -44,7 +48,7 @@ class RecipeTile extends React.Component {
         onMouseLeave={this.onMouseLeaveHandler}
         title={this.state.hover ? this.props.recipeId : undefined }
         actionIcon={
-          <IconButton onTouchTap={this.props.openDialog}>
+          <IconButton onTouchTap={this.openRecipe}>
             <OpenInNew color="white" />
           </IconButton>
         } >

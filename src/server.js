@@ -32,7 +32,7 @@ app.get("/home", function(req, res) {
   basePage.push('<meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />');
   basePage.push('<link href="styles/main.css" rel="stylesheet" type="text/css" />');
   basePage.push('</head>');
-  basePage.push('<body>');
+  basePage.push('<body style="background:#000">');
   basePage.push('<script async defer src="app.js" ></script>');
   basePage.push('<div id="mainContainer"></div>');
   basePage.push('</body>');
