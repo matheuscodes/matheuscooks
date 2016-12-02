@@ -1,7 +1,10 @@
 import React from 'react';
-import {request} from 'app/helpers';
+import {autobind} from 'core-decorators'
 
-import {GridList} from 'material-ui/GridList';
+import GridList from 'material-ui/GridList';
+import Dialog from 'material-ui/Dialog';
+
+import {request} from 'app/helpers';
 
 import RecipeTile from 'app/RecipeTile.jsx';
 
@@ -10,11 +13,11 @@ import RecipeTile from 'app/RecipeTile.jsx';
  * @author Matheus
  * @since 1.0.0
  */
-
+ @autobind
 class RecipeGrid extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {recipes:[]};
+    this.state = {recipes:[],open:false};
     this.style = {
       root: {
         display: 'flex',
@@ -38,9 +41,22 @@ class RecipeGrid extends React.Component {
     request('/recipes','GET',callbacks).send();
   }
 
+  handleClose() {
+    let current = this.state;
+    current.open = false;
+    this.setState(current);
+  }
+
+  handleOpen() {
+    let current = this.state;
+    current.open = true;
+    this.setState(current);
+  }
+
   render() {
     let recipes = this.state.recipes.map((recipe) =>
       <RecipeTile
+        openDialog={this.handleOpen}
         rows={1}
         cols={1}
         key={recipe}
@@ -55,9 +71,16 @@ class RecipeGrid extends React.Component {
           )}
           cellHeight={320}
           padding={1}
-          style={this.style.gridList}>
+          style={this.style.gridList} >
           {(recipes || 'No recipes.')}
         </GridList>
+        <Dialog
+          title="Dialog With Actions"
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose} >
+          The actions in this window were passed in as an array of React objects.
+        </Dialog>
       </div>
     );
   }

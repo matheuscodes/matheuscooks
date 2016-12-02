@@ -17,6 +17,11 @@ class RecipeTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {hover:false}
+    this.style ={
+      root:{
+        fontFamily:'DJBChalkItUp'
+      }
+    }
   }
 
   onMouseEnterHandler() {
@@ -34,11 +39,12 @@ class RecipeTile extends React.Component {
   render() {
     return (
       <GridTile
+        style={this.style.root}
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
-        title={this.state.hover ? this.props.recipeId : undefined}
+        title={this.state.hover ? this.props.recipeId : undefined }
         actionIcon={
-          <IconButton>
+          <IconButton onTouchTap={this.props.openDialog}>
             <OpenInNew color="white" />
           </IconButton>
         } >
