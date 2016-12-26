@@ -1,7 +1,10 @@
 require('app-module-path').addPath(__dirname);
-var express = require('express');
-var http = require('http');
-var fs = require('fs');
+const express = require('express');
+const http = require('http');
+const fs = require('fs');
+const chalk = require('chalk');
+
+const calculateNutritionValues = require('engine/calculateNutritionValues');
 
 var app = express();
 
@@ -13,15 +16,25 @@ var recipeErrors = 0;
 
 fs.readdirSync('recipes').forEach(function(recipe){
   try{
+    console.log(['\n',recipe,':'].join(''));
     const fullRecipe = fs.readFileSync(['recipes',recipe].join('/'));
-    recipeMap[recipe] = JSON.parse(fullRecipe.toString());
+    const readRecipe = JSON.parse(fullRecipe.toString());
+    const calculation = calculateNutritionValues(readRecipe);
+    recipeMap[recipe] = calculation.recipe;
+    if(calculation.missedIngredients.length > 0){
+      console.log(chalk.yellow(['\t✖ missed ',calculation.missedIngredients].join('')));
+      recipeErrors += 1;
+    } else {
+      console.log(chalk.green('\t✓ Loaded ok'));
+    }
   } catch(e) {
+    console.log(chalk.red(['\t✖ failed due to ',e.message].join('')));
     recipeErrors += 1;
   }
   recipeList.push(recipe); // FIXME only add to list if no error.
 });
 
-console.log("Amount of recipes read:",recipeList.length);
+console.log("\n\nAmount of recipes read:",recipeList.length);
 console.log("Amount of reading errors:",recipeErrors);
 
 app.get("/home", function(req, res) {
