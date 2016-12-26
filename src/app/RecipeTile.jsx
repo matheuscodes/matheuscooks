@@ -57,7 +57,7 @@ class RecipeTile extends React.Component {
             constants.image.server,
             'images/recipes/',
             this.props.recipeId,
-            constants.image.extension
+            '.jpg'
           ].join('')} />
       </GridTile>
     );

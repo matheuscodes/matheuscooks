@@ -7,7 +7,7 @@
     "bundle": "browserify src/application.js -t babelify --outfile build/app.js",
     "build": "rm -rf build && mkdir build && npm run bundle",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node src/server.js",
     "fresh-start": "npm run bundle && node src/server.js"
   },
   "repository": {
@@ -28,7 +28,8 @@
     "material-ui": "^0.16.4",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "ingredients": "git+https://github.com/matheuscodes/matheuscooks-ingredients.git"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^2.3.0",

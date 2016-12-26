@@ -7,6 +7,7 @@ import {GridList,GridTile} from 'material-ui/GridList';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 import IngredientsTable from 'app/IngredientsTable.jsx'
+import NutritionFactsGeneralTable from 'app/NutritionFactsGeneralTable.jsx'
 
 const style = {
   content:{
@@ -64,7 +65,7 @@ class RecipeDialog extends React.Component {
                 constants.image.server,
                 'images/recipes/',
                 this.props.recipeId,
-                constants.image.extension
+                '.jpg'
               ].join('')} />
           </GridTile>
 
@@ -78,7 +79,63 @@ class RecipeDialog extends React.Component {
               </Tab>
 
               <Tab label="Nutrition Facts" >
-                This is nutrition
+                <GridList
+                  cols={2}
+                  cellHeight={'auto'}
+                  padding={4} >
+                  <GridTile>
+                    <NutritionFactsGeneralTable data={{
+                            energy:{
+                              hundred:123,
+                              portion:123
+                            },
+                            protein:{
+                              hundred:123,
+                              portion:123
+                            },
+                            carbs:{
+                              hundred:123,
+                              portion:123,
+                              sugars:{
+                                hundred:123,
+                                portion:123
+                              },
+                              fiber:{
+                                hundred:123,
+                                portion:123
+                              },
+                              starch:{
+                                hundred:123,
+                                portion:123
+                              }
+                            },
+                            fat:{
+                              hundred:123,
+                              portion:123,
+                              monosaturated:{
+                                hundred:123,
+                                portion:123
+                              },
+                              polyunsaturated:{
+                                hundred:123,
+                                portion:123
+                              },
+                              saturated:{
+                                hundred:123,
+                                portion:123
+                              },
+                              transFats:{
+                                hundred:123,
+                                portion:123
+                              }
+                            },
+                            cholesterol:{
+                              hundred:123,
+                              portion:123
+                            }
+                      }}/>
+                  </GridTile>
+                </GridList>
               </Tab>
             </Tabs>
           </GridTile>
