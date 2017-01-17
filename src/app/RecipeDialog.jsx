@@ -8,6 +8,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 
 import IngredientsTable from 'app/IngredientsTable.jsx'
 import NutritionFactsGeneralTable from 'app/NutritionFactsGeneralTable.jsx'
+import NutritionFactsVitaminsTable from 'app/NutritionFactsVitaminsTable.jsx'
+import NutritionFactsMineralsTable from 'app/NutritionFactsMineralsTable.jsx'
 
 const style = {
   content:{
@@ -77,17 +79,26 @@ class RecipeDialog extends React.Component {
                   'No ingredients'
                 }
               </Tab>
-
-              <Tab label="Nutrition Facts" >
-                <GridList
-                  cols={2}
-                  cellHeight={'auto'}
-                  padding={4} >
-                  <GridTile>
-                    <NutritionFactsGeneralTable data={this.state.recipe.nutritionValues}/>
-                  </GridTile>
-                </GridList>
-              </Tab>
+              {this.state.recipe.nutritionValues ?
+                <Tab label="Nutrition Facts" >
+                  <GridList
+                    cols={2}
+                    cellHeight={'auto'}
+                    padding={4} >
+                    <GridTile>
+                      <NutritionFactsGeneralTable data={this.state.recipe.nutritionValues}/>
+                    </GridTile>
+                    <GridTile>
+                      <NutritionFactsVitaminsTable data={this.state.recipe.nutritionValues.vitamins}/>
+                    </GridTile>
+                    <GridTile>
+                      {''}
+                    </GridTile>
+                    <GridTile>
+                      <NutritionFactsMineralsTable data={this.state.recipe.nutritionValues.minerals}/>
+                    </GridTile>
+                  </GridList>
+                </Tab> : ''}
             </Tabs>
           </GridTile>
         </GridList>
