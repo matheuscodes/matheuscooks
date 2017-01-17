@@ -37,7 +37,7 @@ class IngredientsTable extends React.Component {
         this.setState({recipe:JSON.parse(response.responseText)});
       }
     }
-    request(['/recipes/',nextProps.recipeId].join(''),'GET',callbacks).send();
+    request(['recipes/',nextProps.recipeId].join(''),'GET',callbacks).send();
   }
 
   render() {

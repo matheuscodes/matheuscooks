@@ -39,7 +39,7 @@ class RecipeGrid extends React.Component {
         this.setState({recipes:JSON.parse(response.responseText)});
       }
     }
-    request('/recipes','GET',callbacks).send();
+    request('recipes','GET',callbacks).send();
   }
 
   handleClose() {
