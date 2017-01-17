@@ -14,30 +14,31 @@ const recipeList = [];
 const recipeMap = {};
 var recipeErrors = 0;
 
-fs.readdirSync('recipes').forEach(function(recipe){
+fs.readdirSync('node_modules/matheuscooks-recipes/vegan').forEach(function(recipe){
   try{
     console.log(['\n',recipe,':'].join(''));
-    const fullRecipe = fs.readFileSync(['recipes',recipe].join('/'));
+    const fullRecipe = fs.readFileSync(['node_modules/matheuscooks-recipes/vegan',recipe].join('/'));
     const readRecipe = JSON.parse(fullRecipe.toString());
     const calculation = calculateNutritionValues(readRecipe);
-    recipeMap[recipe] = calculation.recipe;
+    const recipeId = recipe.replace('.json','');
+    recipeMap[recipeId] = calculation.recipe;
     if(calculation.missedIngredients.length > 0){
       console.log(chalk.yellow(['\t✖ missed ',calculation.missedIngredients].join('')));
       recipeErrors += 1;
     } else {
       console.log(chalk.green('\t✓ Loaded ok'));
     }
+    recipeList.push(recipeId);
   } catch(e) {
     console.log(chalk.red(['\t✖ failed due to ',e.message].join('')));
     recipeErrors += 1;
   }
-  recipeList.push(recipe); // FIXME only add to list if no error.
 });
 
 console.log("\n\nAmount of recipes read:",recipeList.length);
 console.log("Amount of reading errors:",recipeErrors);
 
-app.get("/home", function(req, res) {
+app.get("/", function(req, res) {
   let basePage = [];
   basePage.push('<html>');
   basePage.push('<head>');
@@ -53,7 +54,6 @@ app.get("/home", function(req, res) {
   res.send(basePage.join(''));
 });
 
-app.use('/images',express.static('images'));
 app.use('/fonts',express.static('fonts'));
 
 app.param('recipe', function(req, res, next, recipe) {
@@ -74,8 +74,6 @@ app.get('/recipes-index', function(req, res) {
   res.send(JSON.stringify(recipeList));
 });
 
-app.use('/index.html',express.static('src/index.html'));
-app.use('/scripts',express.static('scripts'));
 app.use('/styles',express.static('styles'));
 
 var server = http.createServer(app);
