@@ -28,7 +28,7 @@
     "http": "0.0.0",
     "ingredients": "git+https://github.com/matheuscodes/matheuscooks-ingredients.git",
     "lodash": "^4.17.3",
-    "material-ui": "^0.16.4",
+    "material-ui": "^0.18.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-tap-event-plugin": "^2.0.1",

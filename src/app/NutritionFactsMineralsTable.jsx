@@ -44,8 +44,8 @@ class NutritionFactsMineralsTable extends React.Component {
   render() {
     const values = this.props.data;
 
-    const rows = Object.keys(values).map(mineral => {
-      return (<NutritionFactsTableRow data={{
+    const rows = Object.keys(values).map((mineral, index) => {
+      return (<NutritionFactsTableRow key={index} data={{
         title: (mineralText[mineral] || mineral),
         content: values[mineral],
         originUnit: 'mg'

@@ -18,7 +18,31 @@ const style = {
   },
   body: {
     margin:'5 0',
+  },
+  sideImage: (server,recipeId) => { return {
+    backgroundImage: `url(${server}images/recipes/${recipeId}.jpg)`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center top',
+  }},
+}
+
+function cellHeight(nutritionValues){
+  let minRows = 0;
+  if(typeof nutritionValues !== 'undefined' &&
+     typeof nutritionValues.vitamins !== 'undefined'){
+    if(Object.keys(nutritionValues.vitamins).length > minRows){
+      minRows = Object.keys(nutritionValues.vitamins).length;
+    }
   }
+  if(typeof nutritionValues !== 'undefined' &&
+     typeof nutritionValues.minerals !== 'undefined'){
+    if(Object.keys(nutritionValues.minerals).length > minRows){
+      minRows = Object.keys(nutritionValues.minerals).length;
+    }
+  }
+  console.log(minRows)
+  return (minRows || 6) * 32 /*rows*/ + 32 /*portion*/ + 55 /*title*/
 }
 
 
@@ -58,15 +82,9 @@ class RecipeDialog extends React.Component {
         onRequestClose={this.props.onRequestClose} >
         <GridList
           cols={3}
-          cellHeight={'auto'}
+          cellHeight={cellHeight(this.state.recipe.nutritionValues)*2 + 96 /* 2 x tabs for error margin*/}
           padding={4} >
-          <GridTile style={{
-              backgroundImage: `url(${constants.image.server}images/recipes/${this.props.recipeId}.jpg)`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center top',
-            }} />
-
+          <GridTile style={style.sideImage(constants.image.server,this.props.recipeId)} />
           <GridTile cols={2}>
             <Tabs>
               <Tab label="Ingredients" >
@@ -79,7 +97,7 @@ class RecipeDialog extends React.Component {
                 <Tab label="Nutrition Facts" >
                   <GridList
                     cols={2}
-                    cellHeight={'auto'}
+                    cellHeight={cellHeight(this.state.recipe.nutritionValues)}
                     padding={4} >
                     <GridTile>
                       <NutritionFactsGeneralTable data={this.state.recipe.nutritionValues}/>

@@ -45,8 +45,8 @@ class NutritionFactsVitaminsTable extends React.Component {
   render() {
     const values = this.props.data;
 
-    const rows = Object.keys(values).map(vitamin => {
-      return (<NutritionFactsTableRow data={{
+    const rows = Object.keys(values).map((vitamin,index) => {
+      return (<NutritionFactsTableRow key={index} data={{
         title: (vitaminText[vitamin] || vitamin),
         content: values[vitamin],
         originUnit: 'mg'

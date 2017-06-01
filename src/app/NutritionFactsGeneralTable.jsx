@@ -7,7 +7,7 @@ import {
 } from 'material-ui/Table';
 
 const styles = {
-  firstColSpan: 2,
+  firstColSpan: 1,
   row:{
     height:'2em'
   },
@@ -49,12 +49,11 @@ class NutritionFactsGeneralTable extends React.Component {
               <TableHeaderColumn
                 style={styles.firstcell}
                 tooltip="Overall nutritional values."
-                colSpan="4" >
+                colSpan="3" >
                 <h2>General</h2>
               </TableHeaderColumn>
             </TableRow>
             <TableRow style={styles.row}>
-              <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
               <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
               <TableHeaderColumn style={styles.cell}>
                 {'per 100g'}
