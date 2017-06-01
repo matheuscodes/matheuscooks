@@ -60,16 +60,12 @@ class RecipeDialog extends React.Component {
           cols={3}
           cellHeight={'auto'}
           padding={4} >
-          <GridTile>
-            <img
-              width={'100%'}
-              src={[
-                constants.image.server,
-                'images/recipes/',
-                this.props.recipeId,
-                '.jpg'
-              ].join('')} />
-          </GridTile>
+          <GridTile style={{
+              backgroundImage: `url(${constants.image.server}images/recipes/${this.props.recipeId}.jpg)`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center top',
+            }} />
 
           <GridTile cols={2}>
             <Tabs>
