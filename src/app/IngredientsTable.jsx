@@ -41,24 +41,19 @@ class IngredientsTable extends React.Component {
   }
 
   render() {
+    const t = this.props.translations;
     return (
       <Table fixedHeader={true} selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false} >
             <TableRow>
+              <TableHeaderColumn />
               <TableHeaderColumn
-                tooltip="This is just a placeholder for a feature."
-                colSpan="3"
-                style={{textAlign: 'center'}} >
-                Change unit
+                tooltip={ t.IngredientsTable.headers.ingredients.tooltip }>
+                {t.IngredientsTable.headers.ingredients.title}
               </TableHeaderColumn>
-            </TableRow>
-            <TableRow>
-              <TableHeaderColumn tooltip=""></TableHeaderColumn>
-              <TableHeaderColumn tooltip="Ingredient">
-                Ingredient
-              </TableHeaderColumn>
-              <TableHeaderColumn tooltip="Amount">
-                Amount
+              <TableHeaderColumn
+                tooltip={ t.IngredientsTable.headers.amounts.tooltip }>
+                {t.IngredientsTable.headers.amounts.title}
               </TableHeaderColumn>
             </TableRow>
           </TableHeader>
@@ -67,6 +62,9 @@ class IngredientsTable extends React.Component {
               <TableRow key={index}>
                 <TableRowColumn>
                   <img
+                    style={{
+                      borderRadius: 32,
+                    }}
                     width={64}
                     height={64}
                     src={[
@@ -76,8 +74,10 @@ class IngredientsTable extends React.Component {
                       '.png'
                     ].join('')} />
                 </TableRowColumn>
-                <TableRowColumn>{ingredient}</TableRowColumn>
-                <TableRowColumn>{this.props.data[ingredient]}</TableRowColumn>
+                <TableRowColumn>
+                  {this.props.translations.ingredients[ingredient] || ingredient}
+                </TableRowColumn>
+                <TableRowColumn>{this.props.data[ingredient]} g</TableRowColumn>
               </TableRow>
             ),this)}
         </TableBody>
@@ -87,7 +87,8 @@ class IngredientsTable extends React.Component {
 }
 
 IngredientsTable.propTypes = {
-  data: React.PropTypes.object
+  data: React.PropTypes.object,
+  translations: React.PropTypes.object,
 }
 
 module.exports = IngredientsTable;

@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const fs = require('fs');
 const chalk = require('chalk');
+const ingredients = require('ingredients');
 
 const calculateNutritionValues = require('engine/calculateNutritionValues');
 
@@ -12,6 +13,17 @@ app.use(express.static('build'));
 
 const recipeList = [];
 const recipeMap = {};
+const translations = {
+  recipes:{original:{},de:{},en:{}},
+  ingredients:{pt:{},de:{},en:{}},
+}
+
+Object.keys(ingredients).forEach(ingredient => {
+  Object.keys(ingredients[ingredient].translations || {}).forEach(language => {
+    translations.ingredients[language][ingredient] = ingredients[ingredient].translations[language];
+  });
+});
+
 var recipeErrors = 0;
 
 fs.readdirSync('node_modules/matheuscooks-recipes/vegan').forEach(function(recipe){
@@ -22,6 +34,9 @@ fs.readdirSync('node_modules/matheuscooks-recipes/vegan').forEach(function(recip
     const calculation = calculateNutritionValues(readRecipe);
     const recipeId = recipe.replace('.json','');
     recipeMap[recipeId] = calculation.recipe;
+    Object.keys(calculation.recipe.titles || {}).forEach((language) => {
+      translations.recipes[language][recipeId] = calculation.recipe.titles[language];
+    });
     if(calculation.missedIngredients.length > 0){
       console.log(chalk.yellow(['\t✖ missed ',calculation.missedIngredients].join('')));
       recipeErrors += 1;
@@ -62,12 +77,29 @@ app.param('recipe', function(req, res, next, recipe) {
   }
   next();
 });
+
+app.param('language', function(req, res, next, language) {
+  if(typeof language !== 'undefined'){
+    req.language = language;
+  }
+  next();
+});
+
 app.get(['/recipes','/recipes/:recipe'], function(req, res) {
   if(typeof req.recipe === 'undefined'){
     res.send(JSON.stringify(recipeList));
   } else {
     res.send(JSON.stringify(recipeMap[req.recipe]));
   }
+});
+
+app.get(['/languages/:language/ingredients.json'], function(req, res) {
+  res.send(JSON.stringify(translations.ingredients[req.language]));
+});
+
+app.get(['/languages/:language/recipes.json'], function(req, res) {
+  res.send(JSON.stringify(translations.recipes[req.language] ||
+                          translations.recipes['original']));
 });
 
 app.get('/recipes-index', function(req, res) {

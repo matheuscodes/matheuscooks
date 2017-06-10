@@ -24,7 +24,7 @@ class Homepage extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <RecipeGrid />
+        <RecipeGrid translations={this.props.translations} />
       </MuiThemeProvider>
     );
   }
@@ -32,7 +32,8 @@ class Homepage extends React.Component {
 }
 
 Homepage.propTypes = {
-  userAgent: React.PropTypes.string
+  userAgent: React.PropTypes.string,
+  translations: React.PropTypes.object,
 }
 
 module.exports = Homepage;

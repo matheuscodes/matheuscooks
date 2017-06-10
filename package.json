@@ -40,6 +40,13 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babelify": "^7.3.0",
-    "browserify": "^13.1.1"
+    "browserify": "^13.1.1",
+    "i18next": "^8.4.1",
+    "i18next-browser-languagedetector": "^1.0.1",
+    "i18next-express-middleware": "^1.0.5",
+    "i18next-node-fs-backend": "^1.0.0",
+    "i18next-xhr-backend": "^1.4.2",
+    "moment": "^2.18.1",
+    "react-i18next": "^4.1.1"
   }
 }

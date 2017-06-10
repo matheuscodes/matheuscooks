@@ -24,6 +24,7 @@ const style = {
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center top',
+    margin: '25 20 0 0',
   }},
 }
 
@@ -76,7 +77,7 @@ class RecipeDialog extends React.Component {
         bodyStyle={style.body}
         autoDetectWindowHeight={true}
         autoScrollBodyContent={true}
-        title={this.props.recipeId}
+        title={this.props.translations.recipes[this.props.recipeId]}
         modal={false}
         open={this.props.open}
         onRequestClose={this.props.onRequestClose} >
@@ -87,29 +88,37 @@ class RecipeDialog extends React.Component {
           <GridTile style={style.sideImage(constants.image.server,this.props.recipeId)} />
           <GridTile cols={2}>
             <Tabs>
-              <Tab label="Ingredients" >
+              <Tab label={this.props.translations.Recipe.tabs.ingredients.title} >
                 {this.state.recipe.ingredients ?
-                  <IngredientsTable data={this.state.recipe.ingredients}/> :
-                  'No ingredients'
+                  <IngredientsTable
+                    translations={this.props.translations}
+                    data={this.state.recipe.ingredients}/> :
+                  this.props.translations.Recipe.tabs.ingredients.none
                 }
               </Tab>
               {this.state.recipe.nutritionValues ?
-                <Tab label="Nutrition Facts" >
+                <Tab label={this.props.translations.Recipe.tabs.nutritionFacts.title} >
                   <GridList
                     cols={2}
                     cellHeight={cellHeight(this.state.recipe.nutritionValues)}
-                    padding={4} >
+                    padding={25} >
                     <GridTile>
-                      <NutritionFactsGeneralTable data={this.state.recipe.nutritionValues}/>
+                      <NutritionFactsGeneralTable
+                        translations={this.props.translations}
+                        data={this.state.recipe.nutritionValues}/>
                     </GridTile>
                     <GridTile>
-                      <NutritionFactsVitaminsTable data={this.state.recipe.nutritionValues.vitamins}/>
+                      <NutritionFactsVitaminsTable
+                        translations={this.props.translations}
+                        data={this.state.recipe.nutritionValues.vitamins}/>
                     </GridTile>
                     <GridTile>
                       {''}
                     </GridTile>
                     <GridTile>
-                      <NutritionFactsMineralsTable data={this.state.recipe.nutritionValues.minerals}/>
+                      <NutritionFactsMineralsTable
+                        translations={this.props.translations}
+                        data={this.state.recipe.nutritionValues.minerals}/>
                     </GridTile>
                   </GridList>
                 </Tab> : ''}

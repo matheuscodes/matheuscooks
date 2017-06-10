@@ -62,7 +62,8 @@ class RecipeGrid extends React.Component {
         openDialog={this.handleOpen}
         rows={1} cols={1}
         key={recipe}
-        recipeId={recipe} />
+        recipeId={recipe}
+        recipeName={this.props.translations.recipes[recipe]} />
     );
     return (
       <div style={this.style.root}>
@@ -77,6 +78,7 @@ class RecipeGrid extends React.Component {
           {(recipes || 'No recipes.')}
         </GridList>
         <RecipeDialog
+          translations={this.props.translations}
           recipeId={this.state.recipeId}
           open={this.state.open}
           onRequestClose={this.handleClose} />

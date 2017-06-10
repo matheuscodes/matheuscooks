@@ -17,7 +17,7 @@ class RecipeTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {hover:false}
-    this.style ={
+    this.style = {
       root:{
         fontFamily:'DJBChalkItUp'
       }
@@ -46,7 +46,7 @@ class RecipeTile extends React.Component {
         style={this.style.root}
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
-        title={this.state.hover ? this.props.recipeId : undefined }
+        title={this.state.hover ? (this.props.recipeName ? this.props.recipeName : this.props.recipeId) : undefined }
         actionIcon={
           <IconButton onTouchTap={this.openRecipe}>
             <OpenInNew color="white" />

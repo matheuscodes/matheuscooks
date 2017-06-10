@@ -20,20 +20,6 @@ const styles = {
   }
 }
 
-const vitaminText = {
-  'b1':'Vitamin B1',
-  'b2':'Vitamin B2',
-  'b3':'Vitamin B3',
-  'b4':'Vitamin B4',
-  'b5':'Vitamin B5',
-  'b6':'Vitamin B6',
-  'b12':'Vitamin B12',
-  'choline':'Choline',
-  'folate':'Folate',
-  'e':'Vitamin E',
-  'k':'Vitamin K',
-}
-
 /**
  * Table of general nutrition facts.
  * @author Matheus
@@ -44,6 +30,8 @@ class NutritionFactsVitaminsTable extends React.Component {
 
   render() {
     const values = this.props.data;
+    const t = this.props.translations;
+    const vitaminText = t.NutritionFacts.vitamins;
 
     const rows = Object.keys(values).map((vitamin,index) => {
       return (<NutritionFactsTableRow key={index} data={{
@@ -59,19 +47,19 @@ class NutritionFactsVitaminsTable extends React.Component {
           <TableRow style={styles.row} >
             <TableHeaderColumn
               style={styles.firstcell}
-              tooltip="Overall vitamin values."
+              tooltip={t.NutritionFacts.VitaminsTable.headers.tooltip}
               colSpan="4" >
-              <h2>Vitamins</h2>
+              <h2>{t.NutritionFacts.VitaminsTable.headers.title}</h2>
             </TableHeaderColumn>
           </TableRow>
           <TableRow style={styles.row}>
             <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}>
-              {'per 100g'}
+              {t.NutritionFacts.per100g}
             </TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}>
-              {'per portion'}
+              {t.NutritionFacts.perPortion}
             </TableHeaderColumn>
           </TableRow>
         </TableHeader>

@@ -20,19 +20,6 @@ const styles = {
   }
 }
 
-const mineralText = {
-  'calcium':'Calcium',
-  'copper':'Copper',
-  'iron':'Iron',
-  'magnesium':'Magnesium',
-  'manganese':'Manganese',
-  'phosphorus':'Phosphorus',
-  'potassium':'Potassium',
-  'selenium':'Selenium',
-  'sodium':'Sodium',
-  'zinc':'Zinc',
-}
-
 /**
  * Table of general nutrition facts.
  * @author Matheus
@@ -43,6 +30,8 @@ class NutritionFactsMineralsTable extends React.Component {
 
   render() {
     const values = this.props.data;
+    const t = this.props.translations;
+    const mineralText = t.NutritionFacts.minerals;
 
     const rows = Object.keys(values).map((mineral, index) => {
       return (<NutritionFactsTableRow key={index} data={{
@@ -58,19 +47,19 @@ class NutritionFactsMineralsTable extends React.Component {
           <TableRow style={styles.row} >
             <TableHeaderColumn
               style={styles.firstcell}
-              tooltip="Overall mineral values."
+              tooltip={t.NutritionFacts.MineralsTable.headers.tooltip}
               colSpan="4" >
-              <h2>Minerals</h2>
+              <h2>{t.NutritionFacts.MineralsTable.headers.title}</h2>
             </TableHeaderColumn>
           </TableRow>
           <TableRow style={styles.row}>
             <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}></TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}>
-              {'per 100g'}
+              {t.NutritionFacts.per100g}
             </TableHeaderColumn>
             <TableHeaderColumn style={styles.cell}>
-              {'per portion'}
+              {t.NutritionFacts.perPortion}
             </TableHeaderColumn>
           </TableRow>
         </TableHeader>
